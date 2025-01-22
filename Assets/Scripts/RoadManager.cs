@@ -7,7 +7,7 @@ public class RoadManager : MonoBehaviour
     public GameObject roadPrefab;
     public Transform player;
     public float spawnDistance = 30.0f;
-    public float roadLength = 10.0f;
+    public float roadLength = 20.0f;
     
     private List<GameObject> roads = new List<GameObject>();
     private float lastSpawnPosition = 0.0f;
@@ -39,7 +39,7 @@ public class RoadManager : MonoBehaviour
 
     void RemoveRoad()
     {
-        if (roads.Count > 5)
+        if (roads.Count > 4)
         {
             Destroy(roads[0]);
             roads.RemoveAt(0);
