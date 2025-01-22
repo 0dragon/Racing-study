@@ -19,7 +19,7 @@ public class Car : MonoBehaviour
     private Vector3 lastPosition;
     public float horizontalInput;
     private float score = 0;
-    public float totalDistanceMoved = 0;
+    private float totalDistanceMoved = 0;
     public GameManager gameManager;
 
     void Start()
@@ -49,7 +49,7 @@ public class Car : MonoBehaviour
             {
                 score++;
                 totalDistanceMoved -= scoreIncrementDistance;
-                UpdateScoreText(); // 점수 업데이트
+                UpdateScoreText();
             }
             
             if (currentGas <= 0)
@@ -67,6 +67,12 @@ public class Car : MonoBehaviour
     void UpdateScoreText()
     {
         scoreText.text = "Score: " + score.ToString("F2");
+    }
+    
+    public void AddGas(float amount)
+    {
+        currentGas = Mathf.Min(currentGas + amount, maxGas); // 최대 가스를 초과하지 않도록 설정
+        UpdateGasText();
     }
 
     public void SetHorizontalInput(float input)
