@@ -1369,8 +1369,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
-  m_fontSizeBase: 100
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2171,7 +2171,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1507083947176064338, guid: 2862e70fcd71b4b4683d086991279d0e, type: 3}
       propertyPath: scoreIncrementDistance
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2465172617545386782, guid: 2862e70fcd71b4b4683d086991279d0e, type: 3}
       propertyPath: m_LocalPosition.x
