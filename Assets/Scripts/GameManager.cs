@@ -6,7 +6,8 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public GameObject player;
-    public GameObject panel;
+    public GameObject startPanel;
+    public GameObject ingamePanel;
     public Button startButton;
     
     private Car carController;
@@ -16,6 +17,7 @@ public class GameManager : MonoBehaviour
         carController = player.GetComponent<Car>();
         
         carController.enabled = false;
+        ingamePanel.SetActive(false);
         startButton.onClick.AddListener(StartGame);
     }
 
@@ -24,7 +26,8 @@ public class GameManager : MonoBehaviour
         // 게임 시작 시 플레이어 움직임을 활성화합니다.
         carController.enabled = true;
         // 시작 버튼을 비활성화합니다.
-        panel.SetActive(false);
+        startPanel.SetActive(false);
+        ingamePanel.SetActive(true);
         // startButton.gameObject.SetActive(false);
     }
 }
