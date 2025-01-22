@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public GameObject startPanel;
     public GameObject ingamePanel;
     public Button startButton;
+    public GameObject gameOverPanel;
     
     private Car carController;
     
@@ -18,6 +19,7 @@ public class GameManager : MonoBehaviour
         
         carController.enabled = false;
         ingamePanel.SetActive(false);
+        gameOverPanel.SetActive(false);
         startButton.onClick.AddListener(StartGame);
     }
 
@@ -29,5 +31,12 @@ public class GameManager : MonoBehaviour
         startPanel.SetActive(false);
         ingamePanel.SetActive(true);
         // startButton.gameObject.SetActive(false);
+    }
+
+    public void GameOver()
+    {
+        carController.enabled = false;
+        ingamePanel.SetActive(false);
+        gameOverPanel.SetActive(true);
     }
 }
