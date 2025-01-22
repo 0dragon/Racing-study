@@ -10,13 +10,16 @@ public class Car : MonoBehaviour
     public float turnSpeed = 10.0f;
     
     public float maxGas = 100.0f;
-    public float gasConsumptionRate = 1f; // 이동 거리 당 가스 소모량
+    public float gasConsumptionRate = 0.5f; // 이동 거리 당 가스 소모량
+    public float scoreIncrementDistance = 10.0f; // 점수 증가량
     private float currentGas;
     public TMP_Text gasText;
+    public TMP_Text scoreText;
     
     private Vector3 lastPosition;
     public float horizontalInput;
-    
+    private float score = 0;
+    public float totalDistanceMoved = 0;
     public GameManager gameManager;
 
     void Start()
@@ -24,6 +27,8 @@ public class Car : MonoBehaviour
         gameManager = FindObjectOfType<GameManager>();
         currentGas = maxGas;
         lastPosition = transform.position;
+        UpdateGasText();
+        UpdateScoreText();
     }
     
     void Update()
@@ -35,9 +40,17 @@ public class Car : MonoBehaviour
             
             float distanceMoved = Vector3.Distance(transform.position, lastPosition);
             currentGas -= distanceMoved * gasConsumptionRate;
+            totalDistanceMoved += distanceMoved;
             lastPosition = transform.position;
 
             UpdateGasText();
+            
+            if (totalDistanceMoved >= scoreIncrementDistance)
+            {
+                score++;
+                totalDistanceMoved -= scoreIncrementDistance;
+                UpdateScoreText(); // 점수 업데이트
+            }
             
             if (currentGas <= 0)
             {
@@ -49,6 +62,11 @@ public class Car : MonoBehaviour
     void UpdateGasText()
     {
         gasText.text = "Gas: " + Mathf.Max(currentGas, 0).ToString("F2");
+    }
+
+    void UpdateScoreText()
+    {
+        scoreText.text = "Score: " + score.ToString("F2");
     }
 
     public void SetHorizontalInput(float input)
