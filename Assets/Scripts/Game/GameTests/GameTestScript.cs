@@ -25,21 +25,20 @@ public class GameTestScript
         // 씬 로드 테스트 
         SceneManager.LoadScene("Scenes/Stage", LoadSceneMode.Single);
         yield return waitForSceneLoad();
-        
+
         // 필수 오브젝트 확인(ex. 게임 매니저 등)
         var gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         Assert.IsNotNull(gameManager, "GameManager is Null");
-        
+
         var startButton = GameObject.Find("Btn_Start");
         Assert.IsNotNull(startButton, "StartButton is null");
+
+        // 게임 실행
+        startButton.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
         
-        // Start 버튼 클릭
-        startButton.GetComponent<UnityEngine.UI.Button>.onClick.Invoke();
         
-        // 반복
-        while(gameManager.GameState == )
-        
-        yield return null;
+
+    yield return null;
     }
 
     private IEnumerator waitForSceneLoad()
