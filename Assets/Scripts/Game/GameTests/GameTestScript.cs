@@ -36,7 +36,50 @@ public class GameTestScript
         // 게임 실행
         startButton.GetComponent<UnityEngine.UI.Button>().onClick.Invoke();
         
+        // 게임 제어 관련 버튼 클릭
+        var leftButton = GameObject.Find("Btn_Left");
+        Assert.IsNotNull(leftButton, "LeftButton is null");
+        var rightButton = GameObject.Find("Btn_Right");
+        Assert.IsNotNull(rightButton, "RightButton is null");
         
+        // 가스의 등장 위치 파악
+        Vector3 leftPosition = new Vector3(-1f, 0.2f, -3f);
+        Vector3 rightPosition = new Vector3(1f, 0.2f, -3f);
+        Vector3 centerPosition = new Vector3(0, 0.2f, -3f);
+
+        float rayDistance = 10f;
+        Vector3 rayDirection = Vector3.forward;
+
+        var InGamePanel = GameObject.Find("InGamePanel");
+        
+        // 반복
+        while (InGamePanel.activeSelf)
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(leftPosition, rayDirection, out hit, rayDistance, LayerMask.GetMask("Gas")))
+            {
+                Debug.Log("left");
+            }
+            else if (Physics.Raycast(rightPosition, rayDirection, out hit, rayDistance,
+                         LayerMask.GetMask("Gas")))
+            {
+                Debug.Log("right");
+            }
+            else if (Physics.Raycast(centerPosition, rayDirection, out hit, rayDistance, LayerMask.GetMask("Gas")))
+            {
+                Debug.Log("center");
+            }
+            else
+            {
+                Debug.Log("none");
+            }
+            
+            Debug.DrawRay(leftPosition, rayDirection * rayDistance, Color.red);
+            Debug.DrawRay(rightPosition, rayDirection * rayDistance, Color.blue);
+            Debug.DrawRay(centerPosition, rayDirection * rayDistance, Color.green);
+            
+            yield return null;
+        }
 
     yield return null;
     }
